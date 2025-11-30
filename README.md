@@ -96,3 +96,17 @@ Project Structure
     • Make sure the Angular server and Flutter app run on the same network when using real devices.
 
     • For Android emulators, use 10.0.2.2 as the host to reach your PC localhost.
+
+8. Screenshots
+
+   
+![1](https://github.com/user-attachments/assets/1e4dd440-fa3d-407b-997d-b31b3c1f8357)
+
+
+![2](https://github.com/user-attachments/assets/4ff0740f-4944-4a85-9d01-5aa0a38dd630)
+
+
+![3](https://github.com/user-attachments/assets/bfc058b6-9492-4869-bd2a-4c1e72ff753c)
+
+
+![4](https://github.com/user-attachments/assets/03f0f65f-ef8b-4e3d-b600-31f498abfc5e)
