@@ -1,0 +1,84 @@
+<div class="bg-white shadow-lg rounded-lg p-6">
+  <h2 class="text-3xl font-semibold mb-6 text-gray-800">Support Tickets</h2>
+
+  <div class="mb-6 flex flex-wrap gap-3">
+    
+    <button 
+      (click)="filterTickets('All')" 
+      class="px-5 py-2 rounded-xl text-base font-medium transition duration-150 shadow-sm"
+      [class.bg-blue-950]="activeFilter === 'All'"
+      [class.text-white]="activeFilter === 'All'"
+      [class.bg-gray-200]="activeFilter !== 'All'"
+      [class.text-gray-700]="activeFilter !== 'All'"
+    >
+      All ({{ countTickets('All') }})
+    </button>
+    
+    <button 
+      (click)="filterTickets('Open')" 
+      class="px-5 py-2 rounded-xl text-base font-medium transition duration-150 shadow-sm"
+      [class.bg-blue-950]="activeFilter === 'Open'"
+      [class.text-white]="activeFilter === 'Open'"
+      [class.bg-gray-200]="activeFilter !== 'Open'"
+      [class.text-gray-700]="activeFilter !== 'Open'"
+    >
+      Open ({{ countTickets('Open') }})
+    </button>
+    
+    <button 
+      (click)="filterTickets('In Progress')" 
+      class="px-5 py-2 rounded-xl text-base font-medium transition duration-150 shadow-sm"
+      [class.bg-blue-950]="activeFilter === 'In Progress'"
+      [class.text-white]="activeFilter === 'In Progress'"
+      [class.bg-gray-200]="activeFilter !== 'In Progress'"
+      [class.text-gray-700]="activeFilter !== 'In Progress'"
+    >
+      In Progress ({{ countTickets('In Progress') }})
+    </button>
+    
+    <button 
+      (click)="filterTickets('Closed')" 
+      class="px-5 py-2 rounded-xl text-base font-medium transition duration-150 shadow-sm"
+      [class.bg-blue-950]="activeFilter === 'Closed'"
+      [class.text-white]="activeFilter === 'Closed'"
+      [class.bg-gray-200]="activeFilter !== 'Closed'"
+      [class.text-gray-700]="activeFilter !== 'Closed'"
+    >
+      Closed ({{ countTickets('Closed') }})
+    </button>
+  </div>
+
+  <div class="overflow-x-auto border border-gray-300 rounded-lg">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Subject</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Created At</th>
+        </tr>
+      </thead>
+      
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let ticket of displayedTickets" class="hover:bg-gray-50 transition">
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ ticket.id }}</td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ ticket.subject }}</td>
+          
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span 
+              class="px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ring-1 ring-inset" 
+              [class]="getStatusClass(ticket.status)" 
+            >
+              {{ ticket.status }}
+            </span>
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">{{ ticket.createdAt }}</td>
+        </tr>
+        
+        <tr *ngIf="displayedTickets.length === 0">
+            <td colspan="4" class="text-center py-6 text-gray-500">No tickets matching the current filter.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

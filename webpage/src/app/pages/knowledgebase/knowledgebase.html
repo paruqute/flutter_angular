@@ -1,0 +1,59 @@
+<div class="bg-white shadow-lg rounded-lg p-6">
+  <h2 class="text-3xl font-semibold mb-6 text-gray-800">Knowledgebase Editor</h2>
+
+    <div class="flex gap-4 mb-6 items-center">
+    
+        <button 
+        (click)="showPreview = false" 
+        [ngClass]="{'bg-blue-950 text-white': !showPreview, 'bg-gray-200 text-gray-700': showPreview}"
+        class="px-5 py-2 rounded-xl font-medium transition shadow-sm"
+        >
+        Edit Mode
+        </button>
+        
+        <button 
+        (click)="showPreview = true" 
+        [ngClass]="{'bg-blue-950 text-white': showPreview, 'bg-gray-200 text-gray-700': !showPreview}"
+        class="px-5 py-2 rounded-xl font-medium transition shadow-sm"
+        >
+        Preview Mode
+        </button>
+        
+        <button 
+        (click)="onSave()" 
+        class="ml-auto px-5 py-2 rounded-xl bg-green-600 text-white hover:bg-green-700 transition shadow-sm"
+        >
+        Save Article
+        </button>
+    </div>
+
+    <p *ngIf="saveMessage" class="text-green-600 font-medium mb-4">{{ saveMessage }}</p>
+
+    <div class="grid grid-cols-1 gap-6">
+
+    <!-- Edit Mode -->
+        <div *ngIf="!showPreview" class="md:col-span-2">
+            <textarea 
+            [(ngModel)]="editorContent" 
+            rows="18" 
+            class="w-full p-4 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-800"
+            placeholder="Start writing your knowledgebase article..."
+            ></textarea>
+        </div>
+
+    <!-- Preview Mode -->
+        <div *ngIf="showPreview" class="border border-gray-300 rounded-lg p-4 bg-gray-50 overflow-y-auto max-h-[500px]">
+            <h3 class="text-lg font-semibold border-b border-gray-300 pb-2 mb-4 text-gray-800">Live Preview</h3>
+            
+            <div [innerHTML]="previewHtml" class="text-gray-700 leading-relaxed"></div>
+            
+            <p *ngIf="editorContent.length === 0" class="text-center text-gray-500 mt-10">
+            Start typing in Edit Mode to see the preview here.
+            </p>
+        </div>
+
+    </div>
+
+    
+  
+</div>
