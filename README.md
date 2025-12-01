@@ -78,7 +78,7 @@ Project Structure
    
     • Notification badge for new messages
    
-    • support keyboard emojies
+    • support emoji messages
    
     (2) Angular Dashboard:
    
@@ -110,3 +110,4 @@ Project Structure
 
 
 ![4](https://github.com/user-attachments/assets/03f0f65f-ef8b-4e3d-b600-31f498abfc5e)
+
