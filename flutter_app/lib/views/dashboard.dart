@@ -13,7 +13,7 @@ class DashboardView extends StatefulWidget {
 class _DashboardViewState extends State<DashboardView> {
   late WebViewController _webViewController;
 
-  String urlToLoad = "http://192.168.1.118:4200/";
+  String urlToLoad = "http://192.168.x.xxx:4200/"; //for a real phone, I just use my laptop’s local IP, so replace with your device IP
   bool loadError = false;
   bool isLoading = true;
 
