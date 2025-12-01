@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'models/message.dart';
 
 void main() async{
+
 WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(MessageAdapter());
