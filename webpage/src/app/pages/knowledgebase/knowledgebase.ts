@@ -1,6 +1,7 @@
 import { NgClass, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
+import { marked } from 'marked'; 
 
 @Component({
   selector: 'app-knowledgebase',
@@ -21,7 +22,7 @@ export class Knowledgebase {
   
   get previewHtml(): string {
   
-    return this.editorContent.replace(/\n/g, '<br>');
+    return marked.parse(this.editorContent) as string;
   }
 
   // Save button 
