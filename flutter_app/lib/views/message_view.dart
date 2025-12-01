@@ -1,7 +1,9 @@
 
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grouped_list/grouped_list.dart';
+import 'package:messaging_app/utils/color.dart';
 import 'package:provider/provider.dart';
 
 import '../models/message.dart';
@@ -21,6 +23,7 @@ class _MessagingViewState extends State<MessagingView> {
   late TextEditingController _controller;
   late FocusNode _focusNode;
   ScrollController _scrollController = ScrollController();
+  ScrollController _scrollController2 = ScrollController();
   bool showEmojiPicker = false;
 
   @override
@@ -102,9 +105,59 @@ class _MessagingViewState extends State<MessagingView> {
                   child: TextInputWidget(
                     controller: _controller,
                     focusNode: _focusNode,
+                    showEmojiPicker: showEmojiPicker,
+                      onTapTextField: () {
+                        if (_focusNode.hasFocus) {
+                          print(".............................");
+                          Provider.of<ChatProvider>(context, listen: false).markAllAsRead();
+                          if(showEmojiPicker==true){
+                            setState(() {
+                              showEmojiPicker = false;
+                            });
+                          }
+                        }
+                      },
+                    scrollController: _scrollController2,
+                    onTapPrefixIcon: () {
+                      setState(() {
+                        showEmojiPicker = !showEmojiPicker;
+                      });
+                      if(showEmojiPicker){
+                        FocusScope.of(context).unfocus();
+                      }else{
+                        FocusScope.of(context).requestFocus();
+                      }
+                    },
 
                   ),
                 ),
+                Offstage(
+                  offstage: !showEmojiPicker,
+                  child: EmojiPicker(
+                    textEditingController: _controller,
+                    config:  Config(
+                      height: 256,
+                      searchViewConfig: SearchViewConfig(),
+                        categoryViewConfig: CategoryViewConfig(
+                          indicatorColor: primaryColor,
+                          backgroundColor: primaryColor.withValues(alpha: 0.1),
+                          dividerColor: primaryColor.withValues(alpha: 0.2),
+                          iconColorSelected: primaryColor,
+                        ),
+                      emojiViewConfig: EmojiViewConfig(
+                        backgroundColor: primaryColor.withValues(alpha: 0.1)
+
+
+                      ),
+                        bottomActionBarConfig: const BottomActionBarConfig(
+                          showSearchViewButton: false,
+                          showBackspaceButton: false,
+                        ),
+
+
+                    ),
+                  ),
+                )
 
               ],
             ),
